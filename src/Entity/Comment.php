@@ -32,6 +32,12 @@ class Comment
      */
     private $approved;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=house::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $house;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class Comment
     public function setApproved(bool $approved): self
     {
         $this->approved = $approved;
+
+        return $this;
+    }
+
+    public function getHouse(): ?house
+    {
+        return $this->house;
+    }
+
+    public function setHouse(?house $house): self
+    {
+        $this->house = $house;
 
         return $this;
     }
