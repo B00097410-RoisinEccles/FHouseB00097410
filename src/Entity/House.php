@@ -34,6 +34,12 @@ class House
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Sponsor::class, inversedBy="houses")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Sponsor;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -95,6 +101,18 @@ class House
                 $comment->setHouse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSponsor(): ?Sponsor
+    {
+        return $this->Sponsor;
+    }
+
+    public function setSponsor(?Sponsor $Sponsor): self
+    {
+        $this->Sponsor = $Sponsor;
 
         return $this;
     }
