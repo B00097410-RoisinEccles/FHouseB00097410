@@ -33,7 +33,7 @@ class Comment
     private $approved;
 
     /**
-     * @ORM\ManyToOne(targetEntity=house::class, inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity=House::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $house;
