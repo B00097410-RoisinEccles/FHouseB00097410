@@ -36,7 +36,7 @@ class House
 
     /**
      * @ORM\ManyToOne(targetEntity=Sponsor::class, inversedBy="houses")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Sponsor;
 
