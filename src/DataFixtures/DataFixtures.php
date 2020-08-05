@@ -37,7 +37,7 @@ class DataFixtures extends Fixture
         // Create staff user
         $staffUser = new User();
         $staffUser->setUsername('staff');
-        $staffUser->setPassword('staff');
+        $staffUser->setPassword($this->encoder->encodePassword($adminUser, 'staff'));
         // Commiting the object to database
         $manager->persist($staffUser);
         $manager->flush();
@@ -50,7 +50,7 @@ class DataFixtures extends Fixture
             // and use that same value for the username and password
             $randomUsername = $this->faker->userName;
             $randomUser->setUsername($randomUsername);
-            $randomUser->setPassword($randomUsername);
+            $randomUser->setPassword($this->encoder->encodePassword($randomUser, $randomUsername));
             // Commiting the object to database
             $manager->persist($randomUser);
             $manager->flush();
