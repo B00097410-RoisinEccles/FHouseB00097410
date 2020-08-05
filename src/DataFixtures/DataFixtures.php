@@ -9,10 +9,16 @@ use App\Entity\Comment;
 use App\Entity\House;
 use App\Entity\User;
 use App\Entity\Sponsor;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class DataFixtures extends Fixture
 {
     private $faker;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
 
     public function load(ObjectManager $manager)
     {
@@ -23,7 +29,7 @@ class DataFixtures extends Fixture
         // Create admin user
         $adminUser = new User();
         $adminUser->setUsername('admin');
-        $adminUser->setPassword('admin');
+        $adminUser->setPassword($this->encoder->encodePassword($adminUser, 'admin'));
         // Commiting the object to database
         $manager->persist($adminUser);
         $manager->flush();
