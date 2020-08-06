@@ -6,7 +6,28 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    <a href="/">Home</a>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="/admin">Admin Homepage</a>
+        {% endif %}
+
+        {% if is_granted('ROLE_STAFF') %}
+            <a href="/staff">Staff Homepage</a>
+        {% endif %}
+
+        <a href="/logout">Logout</a>
+        Welcome {{ app.user.username }}!
+
+    {% else %}
+
+        <a href="/login">Login</a>
+
+    {% endif %}
+
+
+    {% block body %}{% endblock %}
+    {% block javascripts %}{% endblock %}
     </body>
 </html>
