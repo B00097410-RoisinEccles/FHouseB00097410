@@ -30,6 +30,7 @@ class DataFixtures extends Fixture
         $adminUser = new User();
         $adminUser->setUsername('admin');
         $adminUser->setPassword($this->encoder->encodePassword($adminUser, 'admin'));
+        $adminUser->setRole('ROLE_ADMIN');
         // Commiting the object to database
         $manager->persist($adminUser);
         $manager->flush();
@@ -38,6 +39,7 @@ class DataFixtures extends Fixture
         $staffUser = new User();
         $staffUser->setUsername('staff');
         $staffUser->setPassword($this->encoder->encodePassword($adminUser, 'staff'));
+        $staffUser->setRole('ROLE_STAFF');
         // Commiting the object to database
         $manager->persist($staffUser);
         $manager->flush();
@@ -51,6 +53,14 @@ class DataFixtures extends Fixture
             $randomUsername = $this->faker->userName;
             $randomUser->setUsername($randomUsername);
             $randomUser->setPassword($this->encoder->encodePassword($randomUser, $randomUsername));
+
+            // Randomly create a staff or admin user
+            if (rand(0, 1) == 0) {
+                $randomUser->setRole('ROLE_ADMIN');
+            } else {
+                $randomUser->setRole('ROLE_STAFF');
+            }
+
             // Commiting the object to database
             $manager->persist($randomUser);
             $manager->flush();
