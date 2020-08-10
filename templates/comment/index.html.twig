@@ -7,26 +7,28 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>Created</th>
-                <th>Approved</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Content</th>
+            <th>Created</th>
+            <th>Approved</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for comment in comments %}
-            <tr>
-                <td>{{ comment.id }}</td>
-                <td>{{ comment.content }}</td>
-                <td>{{ comment.created ? comment.created|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ comment.approved ? 'Yes' : 'No' }}</td>
-                <td>
-                    {{ include('comment/_approve_form.html.twig') }}
-                    {{ include('comment/_reject_form.html.twig') }}
-                </td>
-            </tr>
+            {% if not comment.approved %}
+                <tr>
+                    <td>{{ comment.id }}</td>
+                    <td>{{ comment.content }}</td>
+                    <td>{{ comment.created ? comment.created|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ comment.approved ? 'Yes' : 'No' }}</td>
+                    <td>
+                        {{ include('comment/_approve_form.html.twig') }}
+                        {{ include('comment/_reject_form.html.twig') }}
+                    </td>
+                </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="5">no records found</td>
