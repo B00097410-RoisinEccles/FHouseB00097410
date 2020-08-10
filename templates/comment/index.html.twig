@@ -23,8 +23,8 @@
                 <td>{{ comment.created ? comment.created|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ comment.approved ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('comment_show', {'id': comment.id}) }}">show</a>
-                    <a href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a>
+                    {{ include('comment/_approve_form.html.twig') }}
+                    {{ include('comment/_reject_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
