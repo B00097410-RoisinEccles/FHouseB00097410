@@ -79,6 +79,19 @@ class CommentController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/approve", name="comment_approve", methods={"POST"})
+     */
+    public function approve(Request $request, Comment $comment): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $comment->setApproved(true);
+        $entityManager->persist($comment);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('comment_index');
+    }
+
+    /**
      * @Route("/{id}", name="comment_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Comment $comment): Response
