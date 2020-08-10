@@ -14,7 +14,6 @@ class HouseType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('Sponsor')
         ;
     }
 
