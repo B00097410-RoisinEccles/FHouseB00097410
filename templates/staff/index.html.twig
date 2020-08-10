@@ -9,12 +9,10 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Welcome to the Staff section</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/roisi/Documents/FHouseB00097410/src/Controller/StaffController.php'|file_link(0) }}">src/Controller/StaffController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/roisi/Documents/FHouseB00097410/templates/staff/index.html.twig'|file_link(0) }}">templates/staff/index.html.twig</a></code></li>
-    </ul>
+    <a href="{{ path('house_new') }}">Create new house</a>
+    <a href="/staff/comment">Manage unapproved comments</a>
+
 </div>
 {% endblock %}
