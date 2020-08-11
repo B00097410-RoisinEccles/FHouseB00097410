@@ -30,22 +30,28 @@ class CommentController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $manager = $this->getDoctrine()->getManager();
+
         $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
+        $commentContent = $request->request->get('content');
+        $houseId = $request->request->get('houseId');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($comment);
-            $entityManager->flush();
+        // $houseId, known ID of house
+        // get repository for entity of type House
+        // using HouseRespository.php, lookup house using known ID
+        $house = $manager->getRepository(House::class)->find($houseId);
 
-            return $this->redirectToRoute('comment_index');
-        }
+        $comment->setContent($commentContent);
+        $comment->setCreated(new DateTime('NOW'));
+        $comment->setApproved(false);
+        $comment->setHouse($house); // pass full house object into method
 
-        return $this->render('comment/new.html.twig', [
-            'comment' => $comment,
-            'form' => $form->createView(),
-        ]);
+        $manager->persist($comment);
+        $manager->flush();
+
+        // redirect user to the Show House page
+        // Pass the house ID
+        return $this->redirect($this->generateUrl('house_show', array('id' => $houseId)));
     }
 
     /**
