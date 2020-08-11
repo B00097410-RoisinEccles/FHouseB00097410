@@ -49,6 +49,8 @@
         </tbody>
     </table>
 
+    {{ include('comment/_new_form.html.twig') }}
+
     {% if house.getSponsor() is not null %}
         <h1>Sponsor's Profile</h1>
         {{ house.getSponsor().getProfile() }}
