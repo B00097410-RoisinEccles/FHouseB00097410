@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('comment_new') }}">
+    <textarea name="content"></textarea>
+    <input type="hidden" name="houseId" value="{{ house.id }}"/>
+    <button class="btn">Submit a comment</button>
+</form>
