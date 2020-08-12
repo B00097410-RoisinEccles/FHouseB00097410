@@ -10,7 +10,7 @@ class StaffController extends AbstractController
 {
     /**
      * @Route("/staff", name="staff")
-       * @IsGranted("ROLE_STAFF")
+     * @IsGranted("ROLE_STAFF")
      */
     public function index()
     {

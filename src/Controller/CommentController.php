@@ -11,9 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use \DateTime;
 use App\Entity\House;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * @Route("/staff/comment")
+ * @IsGranted("ROLE_STAFF")
  */
 class CommentController extends AbstractController
 {
