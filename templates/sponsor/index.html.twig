@@ -21,8 +21,9 @@
                 <td>{{ sponsor.name }}</td>
                 <td>{{ sponsor.profile }}</td>
                 <td>
-                    <a href="{{ path('sponsor_show', {'id': sponsor.id}) }}">show</a>
-                    <a href="{{ path('sponsor_edit', {'id': sponsor.id}) }}">edit</a>
+                    <a href="{{ path('sponsor_associate', {'id': sponsor.id}) }}">
+                        Associate with house
+                    </a>
                 </td>
             </tr>
         {% else %}
