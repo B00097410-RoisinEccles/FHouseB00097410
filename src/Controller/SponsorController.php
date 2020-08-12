@@ -3,15 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Sponsor;
+use App\Entity\House;
 use App\Form\SponsorType;
 use App\Repository\SponsorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/admin/sponsor")
+ * @IsGranted("ROLE_STAFF")
  */
 class SponsorController extends AbstractController
 {
@@ -55,6 +58,20 @@ class SponsorController extends AbstractController
     {
         return $this->render('sponsor/show.html.twig', [
             'sponsor' => $sponsor,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/associate", name="sponsor_associate", methods={"GET"})
+     */
+    public function associate(Sponsor $sponsor): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $houses = $entityManager->getRepository(House::class)->findAll();
+
+        return $this->render('sponsor/associate.html.twig', [
+            'houses' => $houses,
+            'sponsor' => $sponsor
         ]);
     }
 
