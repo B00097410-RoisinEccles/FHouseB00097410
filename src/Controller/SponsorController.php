@@ -76,6 +76,28 @@ class SponsorController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/associate", name="sponsor_associate_to", methods={"POST"})
+     */
+    public function associateTo(Request $request, Sponsor $sponsor, SponsorRepository $sponsorRepository): Response
+    {
+        // Get the houseId from form submission
+        $houseId = $request->request->get('houseId');
+
+        // Get house from DB based on the ID
+        $entityManager = $this->getDoctrine()->getManager();
+        $house = $entityManager->getRepository(House::class)->find($houseId);
+
+        // Updating the House object, to point at the requested Sponsor
+        $house->setSponsor($sponsor);
+        $entityManager->persist($house);
+        $entityManager->flush();
+
+        return $this->render('sponsor/index.html.twig', [
+            'sponsors' => $sponsorRepository->findAll(),
+        ]);
+    }
+
+    /**
      * @Route("/{id}/edit", name="sponsor_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Sponsor $sponsor): Response
