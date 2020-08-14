@@ -3,9 +3,26 @@ use App\Tests\AcceptanceTester;
 
 class HomePageCest
 {
-    public function homePageContent(AcceptanceTester $I)
+    public function _before(AcceptanceTester $I)
+    {
+    }
+
+    // tests
+    public function validateHomePageContent(AcceptanceTester $I)
     {
         $I->amOnPage('/');
-        $I->see('welcome to the home page');
+        $I->see('Welcome to Futuristic House Design');
+    }
+
+    public function validateHomePageAboutLink(AcceptanceTester $I)
+    {
+        $I->amOnPage('/');
+        $I->see('About', 'a');
+    }
+
+    public function validateHomePageLoginLink(AcceptanceTester $I)
+    {
+        $I->amOnPage('/');
+        $I->see('Login', 'a');
     }
 }
