@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-    <a href="/">Home</a>
-    <a href="/site/map">SiteMap</a>
-    <a href="/about">About</a>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<a href="/">Home</a>
+<a href="/site/map">SiteMap</a>
+<a href="/about">About</a>
 
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="/admin">Admin Homepage</a>
-        {% endif %}
-
-        {% if is_granted('ROLE_STAFF') %}
-            <a href="/staff">Staff Homepage</a>
-        {% endif %}
-
-        <a href="/logout">Logout</a>
-        Welcome {{ app.user.username }}!
-
-    {% else %}
-
-        <a href="/login">Login</a>
-
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="/admin">Admin Homepage</a>
     {% endif %}
 
+    {% if is_granted('ROLE_STAFF') %}
+        <a href="/staff">Staff Homepage</a>
+    {% endif %}
 
-    {% block body %}{% endblock %}
-    {% block javascripts %}{% endblock %}
-    </body>
+    <a href="/logout">Logout</a>
+    Welcome {{ app.user.username }}!
+
+{% else %}
+
+    <a href="/login">Login</a>
+
+{% endif %}
+
+
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
 </html>

@@ -16,12 +16,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/staff/comment")
- * @IsGranted("ROLE_STAFF")
+
  */
 class CommentController extends AbstractController
 {
     /**
      * @Route("/", name="comment_index", methods={"GET"})
+     * @IsGranted("ROLE_STAFF")
      */
     public function index(CommentRepository $commentRepository): Response
     {
